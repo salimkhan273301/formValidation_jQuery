@@ -5,15 +5,25 @@ function validateCountryCode(inputId) {
   // Remove non-numeric characters
   const numericCountryCode = countryCode.replace(/\D/g, "");
 
-  if (numericCountryCode.length >= 1 && numericCountryCode.length <= 5) {
+  if (numericCountryCode.length <= 5) {
     inputElement.val(numericCountryCode);
     $("#" + inputId + "Error").text("");
-    $("#mobileLabel").addClass("required-label");
+    if (/^\d+$/.test(numericCountryCode)) {
+      $("#mobileLabel").addClass("required-label");
+      $("#countryCodeLabel").addClass("required-label");
+    } else {
+      $("#mobileLabel").removeClass("required-label");
+      $("#countryCodeLabel").removeClass("required-label");
+    }
+  } else if (numericCountryCode.length === 0) {
+    $("#countryCodeLabel").removeClass("required-label");
+    $("#mobileLabel").removeClass("required-label");
   } else {
     $("#" + inputId + "Error").text(
       "Country code must be between 2 and 5 digits."
     );
     $("#mobileLabel").removeClass("required-label");
+    $("#countryCodeLabel").removeClass("required-label");
   }
 }
 
@@ -27,10 +37,20 @@ function validateMobileNumber(inputId) {
   if (numericMobileNumber.length <= 10) {
     inputElement.val(numericMobileNumber);
     $("#" + inputId + "Error").text("");
-    $("#countryCodeLabel").addClass("required-label");
+    if (/^\d+$/.test(numericMobileNumber)) {
+      $("#countryCodeLabel").addClass("required-label");
+      $("#mobileLabel").addClass("required-label");
+    } else {
+      $("#countryCodeLabel").removeClass("required-label");
+      $("#mobileLabel").removeClass("required-label");
+    }
+  } else if (numericMobileNumber.length === 0) {
+    $("#countryCodeLabel").removeClass("required-label");
+    $("#mobileLabel").removeClass("required-label");
   } else {
     $("#" + inputId + "Error").text("Mobile number must be exactly 10 digits.");
     $("#countryCodeLabel").removeClass("required-label");
+    $("#mobileLabel").removeClass("required-label");
   }
 }
 
@@ -38,6 +58,7 @@ $("#countryCode").on("input", function () {
   if ($(this).val().length > 0) {
     validateCountryCode("countryCode");
   } else {
+    $("#countryCodeLabel").removeClass("required-label");
     $("#mobileLabel").removeClass("required-label");
   }
 });
@@ -47,8 +68,6 @@ $("#mobile").on("input", function () {
     validateMobileNumber("mobile");
   } else {
     $("#countryCodeLabel").removeClass("required-label");
+    $("#mobileLabel").removeClass("required-label");
   }
 });
-
-$("#countryCodeLabel").removeClass("required-label");
-$("#mobileLabel").removeClass("required-label");
