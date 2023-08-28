@@ -7,7 +7,9 @@ function validateCountryCode(inputId) {
 
   if (numericCountryCode.length <= 5) {
     inputElement.val(numericCountryCode);
-    $("#" + inputId + "Error").text("");
+    $("#" + inputId + "Error")
+      .css("color", "red")
+      .text("");
     if (/^\d+$/.test(numericCountryCode)) {
       $("#mobileLabel").addClass("required-label");
       $("#countryCodeLabel").addClass("required-label");
@@ -18,10 +20,11 @@ function validateCountryCode(inputId) {
   } else if (numericCountryCode.length === 0) {
     $("#countryCodeLabel").removeClass("required-label");
     $("#mobileLabel").removeClass("required-label");
+    $("#" + inputId + "Error").text("");
   } else {
-    $("#" + inputId + "Error").text(
-      "Country code must be between 2 and 5 digits."
-    );
+    $("#" + inputId + "Error")
+      .css("color", "red")
+      .text("Country code must be between 2 and 5 digits.");
     $("#mobileLabel").removeClass("required-label");
     $("#countryCodeLabel").removeClass("required-label");
   }
@@ -36,7 +39,14 @@ function validateMobileNumber(inputId) {
 
   if (numericMobileNumber.length <= 10) {
     inputElement.val(numericMobileNumber);
-    $("#" + inputId + "Error").text("");
+    if (numericMobileNumber.length < 10) {
+      $("#" + inputId + "Error")
+        .css("color", "red")
+        .text("Mobile number must be at least 10 digits.");
+    } else {
+      $("#" + inputId + "Error").text("");
+    }
+
     if (/^\d+$/.test(numericMobileNumber)) {
       $("#countryCodeLabel").addClass("required-label");
       $("#mobileLabel").addClass("required-label");
@@ -47,8 +57,11 @@ function validateMobileNumber(inputId) {
   } else if (numericMobileNumber.length === 0) {
     $("#countryCodeLabel").removeClass("required-label");
     $("#mobileLabel").removeClass("required-label");
+    $("#" + inputId + "Error").text("");
   } else {
-    $("#" + inputId + "Error").text("Mobile number must be exactly 10 digits.");
+    $("#" + inputId + "Error")
+      .css("color", "red")
+      .text("Mobile number must be exactly 10 digits.");
     $("#countryCodeLabel").removeClass("required-label");
     $("#mobileLabel").removeClass("required-label");
   }
@@ -69,5 +82,6 @@ $("#mobile").on("input", function () {
   } else {
     $("#countryCodeLabel").removeClass("required-label");
     $("#mobileLabel").removeClass("required-label");
+    $("#mobileError").text("");
   }
 });
