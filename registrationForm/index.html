@@ -17,13 +17,27 @@
       <label for="countryCode" id="countryCodeLabel" class="required-label"
         >Country Code:</label
       >
-      <input type="text" id="countryCode" name="countryCode" required />
+      <input
+        type="text"
+        id="countryCode"
+        name="countryCode"
+        required
+        minlength="2"
+        maxlength="5"
+      />
       <span id="countryCodeError" class="error-message"></span>
 
       <label for="mobile" id="mobileLabel" class="required-label"
         >Mobile Number:</label
       >
-      <input type="text" id="mobile" name="mobile" required />
+      <input
+        type="text"
+        id="mobile"
+        name="mobile"
+        required
+        minlength="10"
+        maxlength="10"
+      />
       <span id="mobileError" class="error-message"></span>
 
       <label for="dob">Date of Birth:</label>
