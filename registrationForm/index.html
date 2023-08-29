@@ -19,6 +19,7 @@
         type="text"
         id="countryCode"
         name="countryCode"
+        oninput="validateCountryCode('countryCode')"
         required
         minlength="2"
         maxlength="5"
@@ -29,6 +30,7 @@
       <input
         type="text"
         id="mobile"
+        oninput="validateMobileNumber('mobile')"
         name="mobile"
         required
         minlength="10"

@@ -14,8 +14,8 @@ function validateCountryCode(inputId) {
       $("#mobileLabel").addClass("required-label");
       $("#countryCodeLabel").addClass("required-label");
     } else {
-      $("#mobileLabel").removeClass("required-label");
       $("#countryCodeLabel").removeClass("required-label");
+      $("#mobileLabel").removeClass("required-label");
     }
   } else if (numericCountryCode.length === 0) {
     $("#countryCodeLabel").removeClass("required-label");
@@ -25,8 +25,8 @@ function validateCountryCode(inputId) {
     $("#" + inputId + "Error")
       .css("color", "red")
       .text("Country code must be between 2 and 5 digits.");
-    $("#mobileLabel").removeClass("required-label");
     $("#countryCodeLabel").removeClass("required-label");
+    $("#mobileLabel").removeClass("required-label");
   }
 }
 
@@ -56,7 +56,7 @@ function validateMobileNumber(inputId) {
     }
   } else if (numericMobileNumber.length === 0) {
     $("#countryCodeLabel").removeClass("required-label");
-    $("#mobileLabel").removeClass("required-label");
+    $("#mobileLabel").removeClass("required-label").html("Mobile Number:");
     $("#" + inputId + "Error").text("");
   } else {
     $("#" + inputId + "Error")
@@ -67,21 +67,21 @@ function validateMobileNumber(inputId) {
   }
 }
 
-$("#countryCode").on("input", function () {
-  if ($(this).val().length > 0) {
-    validateCountryCode("countryCode");
-  } else {
-    $("#countryCodeLabel").removeClass("required-label");
-    $("#mobileLabel").removeClass("required-label");
-  }
-});
+// $("#countryCode").on("input", function () {
+//   if ($(this).val().length > 0) {
+//     validateCountryCode("countryCode");
+//   } else {
+//     $("#countryCodeLabel").removeClass("required-label");
+//     $("#mobileLabel").removeClass("required-label");
+//   }
+// });
 
-$("#mobile").on("input", function () {
-  if ($(this).val().length > 0) {
-    validateMobileNumber("mobile");
-  } else {
-    $("#countryCodeLabel").removeClass("required-label");
-    $("#mobileLabel").removeClass("required-label");
-    $("#mobileError").text("");
-  }
-});
+// $("#mobile").on("input", function () {
+//   if ($(this).val().length > 0) {
+//     validateMobileNumber("mobile");
+//   } else {
+//     $("#countryCodeLabel").removeClass("required-label");
+//     $("#mobileLabel").removeClass("required-label");
+//     $("#mobileError").text("");
+//   }
+// });
