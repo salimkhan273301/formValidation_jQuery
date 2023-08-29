@@ -5,18 +5,9 @@ function validateCountryCode(inputId, i) {
   // Remove non-numeric characters
   const numericCountryCode = countryCode.replace(/\D/g, "");
 
-  if (numericCountryCode.length <= 5) {
-    inputElement.val(numericCountryCode);
-    $("#" + inputId + "Error" + i)
-      .css("color", "red")
-      .text("");
-  } else if (numericCountryCode.length === 0) {
-    $("#" + inputId + "Error" + i).text("");
-  } else {
-    $("#" + inputId + "Error" + i)
-      .css("color", "red")
-      .text("Country code must be between 2 and 5 digits.");
-  }
+  inputElement.val(numericCountryCode);
+
+  $("#" + inputId + "Error" + i).text("");
 
   updateLabels(i);
 }
@@ -27,22 +18,20 @@ function validateMobileNumber(inputId, i) {
 
   // Remove non-numeric characters
   const numericMobileNumber = mobileNumber.replace(/\D/g, "");
+  const updatedMobileNo = inputElement.val(numericMobileNumber);
 
-  if (numericMobileNumber.length <= 10) {
-    inputElement.val(numericMobileNumber);
-    if (numericMobileNumber.length < 10) {
+  if (/^\d+$/.test(numericMobileNumber)) {
+    if (numericMobileNumber.length < 10 && numericMobileNumber.length > 0) {
       $("#" + inputId + "Error" + i)
         .css("color", "red")
         .text("Mobile number must be at least 10 digits.");
     } else {
       $("#" + inputId + "Error" + i).text("");
     }
-  } else if (numericMobileNumber.length === 0) {
-    $("#" + inputId + "Error" + i).text("");
   } else {
     $("#" + inputId + "Error" + i)
       .css("color", "red")
-      .text("Mobile number must be exactly 10 digits.");
+      .text("");
   }
 
   updateLabels(i);
